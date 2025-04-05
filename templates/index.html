@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
 
 {% block content %}
-<p>This is the content for index.html!</p>
-<p>{{ username }}</p>
+<h1>YOU'RE LATE TO {{ lecture.module_name.upper() }}!!!</h1>
+<p>Your {{ lecture.unit_code }} lecture starts at {{ lecture.start_time.strftime("%H:%M") }}!!</p>
+<p>you're gonna make {{ lecture.lecturer }} very very very <strong>sad</strong></p>
+
+<p>What's your current state?</p>
+{{ render_form(form) }}
+
 {% endblock %}
