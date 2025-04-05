@@ -49,7 +49,12 @@ def index():
 
 def get_shortest_path(start, finish, G):
 	path = nx.dijkstra_path(G, start, finish)
-	return [{"lng" : G.nodes[i]['lon'], 'lat': G.nodes[i]['lat'], 'popup': i} for i in path]
+	dicts = [{"lng" : G.nodes[i]['lon'], 'lat': G.nodes[i]['lat'], 'popup': i} for i in path]
+	dicts[-1]['distance'] = 0
+	for x in range(len(dicts) - 1):
+		dicts[x]['distance'] = G[path[x]][path[x + 1]]['distance']
+	print(dicts[1])
+	return dicts
 
 
 @app.route("/map")
