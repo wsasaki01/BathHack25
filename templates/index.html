@@ -7,7 +7,7 @@ YOU'RE 10 MINUTES LATE!
 
 {% block content %}
 
-<h1>YOU'RE LATE TO {{ lecture.module_name.upper() }}!!!</h1>
+<h2>YOU'RE LATE TO {{ lecture.module_name.upper() }}!!!</h2>
 <p>Your {{ lecture.unit_code }} lecture starts at {{ lecture.start_time.strftime("%H:%M") }}!!</p>
 <p>you're gonna make {{ lecture.lecturer }} very very very <strong>sad</strong></p>
 
@@ -22,5 +22,13 @@ integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
 crossorigin=""></script>
 <script src="{{url_for("static", filename="scripts.js")}}"></script>
 
+<div class="buttons">
+	<div class="moods">
+		<button type="button">Sleepy</button>
+		<button type="button">Hungover</button>
+	</div>
+	
+	<button type="submit" class="go">GO!</button>
+</div>
 
 {% endblock %}
