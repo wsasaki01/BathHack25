@@ -131,26 +131,10 @@ button {
   width: 50vh;
   max-height: 50vi;
   height: 50vh;
-
-/*.splits {
-	width: 100%;
-	overflow: scroll;
 }
 
-* {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-}
+/*
 
-footer {
-	min-height: 50px;
-	background: PapayaWhip;
-} */
-
-/* The article fills all the space between header & footer */
-
-/*body {
 .content {
 	display: flex;
 	flex-direction: column;
@@ -163,7 +147,7 @@ html, body {
 }
 
 .page-content {
-	flex: 1;  /* Pushes footer down */
+	flex: 1;  // Pushes footer down
 	padding: 20px;
 }
 
@@ -174,4 +158,6 @@ footer {
 	text-align: center;
 	padding: 15px;
 	overflow: scroll;
-}*/
+}
+
+*/
