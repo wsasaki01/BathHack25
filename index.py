@@ -42,18 +42,27 @@ def index():
 	if form.validate_on_submit():
 		state = form.state.data
 		print(f"State picked: {state}")
+		speed = 1.4
+		if state == "Hungover":
+			speed *= 0.8
+		elif state == "Still Drunk":
+			speed *= 0.4
 
-		return redirect(url_for('map', origin_id="1", dest_id="6"))
+		return redirect(url_for('map', origin_id="1", dest_id="6", speed=f"{speed}"))
 
 	return render_template('./index.html', form=form, lecture=lecture)
 
-def get_shortest_path(start, finish, G):
+def get_shortest_path(start, finish, G, speed):
 	path = nx.dijkstra_path(G, start, finish)
 	dicts = [{"lng" : G.nodes[i]['lon'], 'lat': G.nodes[i]['lat'], 'popup': i} for i in path]
 	dicts[-1]['distance'] = 0
+	dicts[-1]['time'] = 0
+	prev = 0
 	for x in range(len(dicts) - 1):
 		dicts[x]['distance'] = G[path[x]][path[x + 1]]['distance']
-	print(dicts[1])
+		dicts[x]['time'] = prev + G[path[x]][path[x + 1]]['distance'] / speed
+		prev = dicts[x]['time']
+	#print(dicts[1])
 	return dicts
 
 
@@ -61,11 +70,12 @@ def get_shortest_path(start, finish, G):
 def map():
 	origin_id = request.args.get('origin_id')
 	dest_id = request.args.get('dest_id')
+	speed = float(request.args.get('speed'))
 	# validate these!
 
 	G = nx.read_graphml('graph.graphml')
 	# Generate path
-	path = get_shortest_path('1', '280', G)
+	path = get_shortest_path('1', '280', G, speed)
 
 	print(path)
 
