@@ -1,6 +1,7 @@
 # Bath Hack 2025
 
-Activate conda environment with:
+Create a virtual environment with all required packages using:
 ```
-conda activate ./env
+python -m venv .venv
+pip install -r requirements.txt
 ```
