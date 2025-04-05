@@ -11,6 +11,8 @@ from forms.index_form import StateForm
 
 import secrets # For secret key
 
+import networkx as nx
+
 app = Flask(__name__)
 foo = secrets.token_urlsafe(16)
 app.secret_key = foo
@@ -36,6 +38,8 @@ def index():
 		module_name="Visual Computing",
 		lecturer="Dr Deblina Bhattacharjee"
 	)
+
+	G = nx.read_edgelist('bath_campus_graph.txt')
 
 	form = StateForm()
 	if form.validate_on_submit():
