@@ -2,26 +2,25 @@
 {% from 'bootstrap5/form.html' import render_form %}
 
 {% block content %}
-<body>
-	<header>{{ time_remaining }}</header>
 
-	<main>
-		<p>From node {{ origin_id }} to {{ dest_id }}</p>
+<div class="page-content">
+	<h1>{{ time_remaining }}</h1>
+	
+	<div id="map"></div>
 
-		<div class="map"></div>
-	</main>
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+	integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+	crossorigin=""></script>
+	<script src="{{url_for("static", filename="scripts.js")}}"></script>
+</div>
 
-	<footer>
-		<div class="splits">
-			<ul id="split-list">
-			{% for node in path %}
-				<li>
-					<span>Node {{ node[0] }}</span>
-					<span>{{ node[1] }}</span>
-				</li>
-			{% endfor %}
-			</ul>
-		</div>
-	</footer>
-</body>
+<footer>
+{% for node in path %}
+	<li class="split-li">
+		<span>Node {{ node[0] }}</span>
+		<span>{{ node[1] }}</span>
+	</li>
+{% endfor %}
+</footer>
+
 {% endblock %}
