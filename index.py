@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, request
 from flask_bootstrap import Bootstrap5
 
 from flask_wtf import FlaskForm, CSRFProtect
@@ -42,12 +42,24 @@ def index():
 		state = form.state.data
 		print(f"State picked: {state}")
 
-		# Generate path
+		return redirect(url_for('map', origin_id="1", dest_id="6"))
 
-		return redirect(url_for('map'))
-
-	return render_template('./index.html', form=form, time_remaining="2 minutes", lecture=lecture)
+	return render_template('./index.html', form=form, lecture=lecture)
 
 @app.route("/map")
 def map():
-	return render_template('./')
+	origin_id = request.args.get('origin_id')
+	dest_id = request.args.get('dest_id')
+	# validate these!
+
+	# Generate path
+	path = [
+		(1, 10),
+		(2, 11),
+		(3, 12),
+		(4, 13),
+		(5, 14),
+		(6, 15)
+	]
+
+	return render_template('./map.html', time_remaining="2 minutes", origin_id=origin_id, dest_id=dest_id, path=path)
