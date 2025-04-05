@@ -2,11 +2,6 @@
 /* setting up colours */
 @import url('https://fonts.googleapis.com/css?family=Kantumruy%20Pro:700|Kantumruy%20Pro:400');
 
-body {
-  font-family: 'Kantumruy Pro';
-  font-weight: 400;
-}
-
 h1, h2, h3, h4, h5 {
   font-family: 'Kantumruy Pro';
   font-weight: 700;
@@ -14,17 +9,17 @@ h1, h2, h3, h4, h5 {
 
 html {font-size: 100%;} /* 16px */
 
-h1 {font-size: 5.652rem; /* 90.4px */}
+h1 {font-size: 8vh; /* 90.4px */}
 
-h2 {font-size: 3.997rem; /* 64px */}
+h2 {font-size: 7vh; /* 64px */}
 
-h3 {font-size: 2.827rem; /* 45.28px */}
+h3 {font-size: 6vh; /* 45.28px */}
 
-h4 {font-size: 1.999rem; /* 32px */}
+h4 {font-size: 4vh; /* 32px */}
 
-h5 {font-size: 1.414rem; /* 22.56px */}
+h5 {font-size: 3vh; /* 22.56px */}
 
-small {font-size: 0.707rem; /* 11.36px */}
+small {font-size: 1vh; /* 11.36px */}
 
 /* themes */
 @media (prefers-color-scheme: light) {
@@ -57,16 +52,23 @@ body {
   background: linear-gradient(0deg, rgba(131,58,180,0.4910131288843662) 0%, rgba(253,29,29,0.8971755938703606) 30%, rgba(252,176,69,0.8831699916294643) 30%, rgba(252,176,69,0.138071952413778) 50%),  url("img/background.png");
   background-blend-mode: overlay;
   background-size: 100% 100%;
-  margin: 5%;
+
+  font-family: 'Kantumruy Pro';
+  font-weight: 400;
+
+  margin: 3%;
+  height: 97vh;
+  overflow: hidden;
 }
 
 .content-container {
-  display: flex; 
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  background-color: white;
+	display: flex; 
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+  
+	background-color: white;
+	min-height: 100%;
 }
 
 /* banner */
@@ -124,6 +126,10 @@ button {
   display: flex;
 }
 
+.page-content {
+	flex: 1;  /* Pushes footer down */
+	padding: 20px;
+}
 
 /* map shenanigans */
 #map {
@@ -133,31 +139,19 @@ button {
   height: 50vh;
 }
 
-/*
-
-.content {
-	display: flex;
-	flex-direction: column;
-	min-height: 100vh;
-	font-family: sans-serif;
-}
-
-html, body {
-	height: 100%;
-}
-
-.page-content {
-	flex: 1;  // Pushes footer down
-	padding: 20px;
-}
-
 footer {
 	height: 20vh;
+	width: 100%;
 	background: #333;
 	color: white;
 	text-align: center;
-	padding: 15px;
 	overflow: scroll;
 }
 
-*/
+.split-li {
+	height: 5vh;
+	line-height: 5vh; /* must be same as height for vertical centering */
+	text-align: center;
+	
+	border-bottom: solid;
+}
