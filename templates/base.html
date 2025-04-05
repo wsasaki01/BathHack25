@@ -1,11 +1,12 @@
 <!doctype html>
-<header>
+<html>
+<head>
 	<title>{% block title %}{% endblock %} - Flaskr</title>
 	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	{% block header %}{% endblock %}
-</header>
+</head>
 
 <body>
 	<section class="content">
@@ -16,3 +17,4 @@
 		{% block content %}{% endblock %}
 	</section>
 <body>
+</html>

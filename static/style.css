@@ -1,30 +1,31 @@
-.splits {
-	width: 100%;
-	overflow: scroll;
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
-body {
+.content {
+	display: flex;
+	flex-direction: column;
 	min-height: 100vh;
-	margin: 0;
+	font-family: sans-serif;
 }
-  
-header {
-	min-height: 50px;
-	background: lightcyan;
+
+html, body {
+	height: 100%;
+}
+
+.page-content {
+	flex: 1; /* Pushes footer down */
+	padding: 20px;
 }
 
 footer {
-	min-height: 50px;
-	background: PapayaWhip;
-}
-
-/* The article fills all the space between header & footer */
-
-body {
-	display: flex;
-	flex-direction: column;
-}
-
-main {
-	flex: 1;
+	height: 20vh;
+	background: #333;
+	color: white;
+	text-align: center;
+	padding: 15px;
+	overflow: scroll;
 }
