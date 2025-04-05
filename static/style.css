@@ -139,6 +139,14 @@ button {
 	padding: 1vh;
 	margin: 0;
 	text-align: center;
+	font-family: "Azeret Mono", monospace;
+	font-optical-sizing: auto;
+	font-weight: 700;
+	font-style: normal;
+	color:white;
+
+	background-image: url('./img/fire-fast.gif');
+	background-size: contain;
 }
 
 .map {

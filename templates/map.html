@@ -5,10 +5,10 @@
 
 <div class="page-content">
 	<h1 id="speedrun-timer">{{ time_remaining }}</h1>
+	<script src="{{ url_for('static', filename='stopwatch.js') }}"></script>
 	
 	<div class="map">
 		<div id="map"></div>
-		<script src="{{ url_for('static', filename='stopwatch.js') }}></script>
 
 		<script>
 			const markerData = {{ path | tojson }};
