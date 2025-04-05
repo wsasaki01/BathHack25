@@ -4,6 +4,7 @@
 {%block banner%}
 YOU'RE 10 MINUTES LATE!
 {%endblock%}
+
 {% block content %}
 
 <h1>YOU'RE LATE TO {{ lecture.module_name.upper() }}!!!</h1>
@@ -12,5 +13,14 @@ YOU'RE 10 MINUTES LATE!
 
 <p>What's your current state?</p>
 {{ render_form(form) }}
+
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+crossorigin=""></script>
+<script src="{{url_for("static", filename="scripts.js")}}"></script>
+
 
 {% endblock %}
