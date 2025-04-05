@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, request
 from flask_bootstrap import Bootstrap5
+import networkx as nx
 
 from flask_wtf import FlaskForm, CSRFProtect
 from wtforms import StringField, SubmitField
@@ -46,20 +47,19 @@ def index():
 
 	return render_template('./index.html', form=form, lecture=lecture)
 
+def get_shortest_path(start, finish, G):
+	path = nx.dijkstra_path(G, start, finish)
+	return [{"lng" : G.nodes[i]['lon'], 'lat': G.nodes[i]['lat'], 'popup': i} for i in path]
+
+
 @app.route("/map")
 def map():
 	origin_id = request.args.get('origin_id')
 	dest_id = request.args.get('dest_id')
 	# validate these!
 
+	G = nx.read_graphml('graph.graphml')
 	# Generate path
-	path = [
-		(1, 0),
-		(2, 1),
-		(3, 2),
-		(4, 2),
-		(5, 2),
-		(6, 4),
-	]
+	path = get_shortest_path('1', '280', G)
 
 	return render_template('./map.html', time_remaining="00:00:000", origin_id=origin_id, dest_id=dest_id, path=path)
