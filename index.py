@@ -56,13 +56,11 @@ def get_shortest_path(start, finish, G, speed):
 	path = nx.dijkstra_path(G, start, finish)
 	dicts = [{"lng" : G.nodes[i]['lon'], 'lat': G.nodes[i]['lat'], 'popup': i} for i in path]
 	dicts[-1]['distance'] = 0
-	dicts[-1]['time'] = 0
+	dicts[0]['time'] = G[path[0]][path[0 + 1]]['distance'] / speed
 	prev = 0
-	for x in range(len(dicts) - 1):
+	for x in range(1, len(dicts) - 1):
 		dicts[x]['distance'] = G[path[x]][path[x + 1]]['distance']
-		dicts[x]['time'] = prev + G[path[x]][path[x + 1]]['distance'] / speed
-		prev = dicts[x]['time']
-	#print(dicts[1])
+		dicts[x]['time'] = (G[path[x - 1]][path[x]]['distance'] / speed) + dicts[x - 1]['time']
 	return dicts
 
 
