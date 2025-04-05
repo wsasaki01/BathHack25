@@ -127,16 +127,29 @@ button {
 }
 
 .page-content {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
 	flex: 1;  /* Pushes footer down */
-	padding: 20px;
+	padding: 0;
+	width: 100%;
+}
+
+#speedrun-timer {
+	padding: 1vh;
+	margin: 0;
+}
+
+.map {
+	flex: 1;
+	display: flex;
+	align-items: stretch;
+	width: 100%;
 }
 
 /* map shenanigans */
 #map {
-  max-width: 50vi;
-  width: 50vh;
-  max-height: 50vi;
-  height: 50vh;
+	flex: 1;
 }
 
 footer {
