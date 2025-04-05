@@ -62,4 +62,6 @@ def map():
 	# Generate path
 	path = get_shortest_path('1', '280', G)
 
+	print(path)
+
 	return render_template('./map.html', time_remaining="00:00:000", origin_id=origin_id, dest_id=dest_id, path=path)

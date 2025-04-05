@@ -8,6 +8,7 @@
 	
 	<div class="map">
 		<div id="map"></div>
+		<script src="{{ url_for('static', filename='stopwatch.js') }}></script>
 
 		<script>
 			const markerData = {{ path | tojson }};
@@ -16,15 +17,15 @@
 		<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
 		integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
 		crossorigin=""></script>
-		<script src="{{ url_for('static', filename='scripts.js') }}"></script>
+		<script src="{{ url_for('static', filename='map.js') }}"></script>
 	</div>
 </div>
 
 <footer>
 {% for node in path %}
 	<li class="split-li">
-		<span class="split-left">Node {{ node[0] }}</span>
-		<span class="split-right">{{ node[1] }}</span>
+		<span class="split-left">Node {{ node.lng }}</span>
+		<span class="split-right">{{ node.lat }}</span>
 	</li>
 {% endfor %}
 </footer>
