@@ -8,5 +8,5 @@ pip install -r requirements.txt
 
 Run the flask app using:
 ```
-flask --app index run
+flask --app index run --debug
 ```
