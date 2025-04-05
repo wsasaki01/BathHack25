@@ -9,18 +9,22 @@
 	<div class="map">
 		<div id="map"></div>
 
+		<script>
+			const markerData = {{ path | tojson }};
+		</script>
+		
 		<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
 		integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
 		crossorigin=""></script>
-		<script src="{{url_for("static", filename="scripts.js")}}"></script>
+		<script src="{{ url_for('static', filename='scripts.js') }}"></script>
 	</div>
 </div>
 
 <footer>
 {% for node in path %}
 	<li class="split-li">
-		<span>Node {{ node[0] }}</span>
-		<span>{{ node[1] }}</span>
+		<span class="split-left">Node {{ node[0] }}</span>
+		<span class="split-right">{{ node[1] }}</span>
 	</li>
 {% endfor %}
 </footer>

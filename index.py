@@ -5,7 +5,7 @@ from flask_wtf import FlaskForm, CSRFProtect
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired, Length
 
-from datetime import datetime
+import datetime as dt
 
 from forms.index_form import StateForm
 
@@ -32,7 +32,7 @@ def index():
 	# Find next lecture
 	lecture = Lecture(
 		unit_code="CM22010",
-		start_time=datetime(2025, 5, 5, 9, 15),
+		start_time=dt.datetime(2025, 5, 5, 9, 15),
 		module_name="Visual Computing",
 		lecturer="Dr Deblina Bhattacharjee"
 	)
@@ -54,12 +54,12 @@ def map():
 
 	# Generate path
 	path = [
-		(1, 10),
-		(2, 11),
-		(3, 12),
-		(4, 13),
-		(5, 14),
-		(6, 15)
+		(1, 0),
+		(2, 1),
+		(3, 2),
+		(4, 2),
+		(5, 2),
+		(6, 4),
 	]
 
-	return render_template('./map.html', time_remaining="2 minutes", origin_id=origin_id, dest_id=dest_id, path=path)
+	return render_template('./map.html', time_remaining="00:00:000", origin_id=origin_id, dest_id=dest_id, path=path)
