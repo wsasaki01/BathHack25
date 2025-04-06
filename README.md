@@ -21,5 +21,5 @@ Then repeat steps above to create from `environment.yml` file.
 
 Run the flask app using:
 ```
-flask --app index run --debug
+flask --app index run --debug --cert=./ssl-shit/server.crt --key=./ssl-shit/server.key --host=0.0.0.0 --port 8000
 ```
