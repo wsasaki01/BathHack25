@@ -73,12 +73,10 @@ def index():
 		node=lec2node[building]
 	)
 
-	print(lec2node[building])
-
 	#session['lecture_start_time'] = lecture.start_time
 
 	origin_node = '1'
-	dest_node = '280' # make this dynamic!!
+	dest_node = str(lecture.building_node) # make this dynamic!!
 
 	# Get path to see how long it would take
 	G = nx.read_graphml('graph.graphml')
@@ -126,7 +124,8 @@ def map():
 
 	G = nx.read_graphml('graph.graphml')
 	# Generate path
-	path = get_shortest_path('1', '280', G, speed)
+
+	path = get_shortest_path(origin_id, dest_id, G, speed)
 
 	times = []
 	for p in path:
