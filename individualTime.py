@@ -2,7 +2,6 @@ import pandas as pd
 from datetime import datetime, timedelta
 
 def getTimetableInfo(myFile):
-
 	myDict = dict()
 
 	df = pd.read_csv(myFile)
@@ -10,12 +9,11 @@ def getTimetableInfo(myFile):
 	rows = len(df)
 
 	for r in range(rows):
-
 		module = df[cols[1]][r]
 		dow = df[cols[3]][r]
 		startDate = df[cols[4]][r]
 		startTime = df[cols[5]][r]
-		staff = df[cols[10]][r].replace(", ", "/")
+		staff = str(df[cols[10]][r]).replace(", ", "/")
 		location = df[cols[11]][r].split()
 		building = location[0]
 		floor, _ = location[1].split(".")
@@ -84,7 +82,7 @@ def getNextLecture(current, myDict):
 
 	return (dateStrg, sub)
 
-myFile = "/Users/tiffanykwok/Desktop/BathHack2025/timetable_2025-04-05.csv" #your timetable stored as csv file
-timetableInfo = getTimetableInfo(myFile)
-current = datetime.now() #get device time
-print(getNextLecture(current, timetableInfo))
+#myFile = "/Users/tiffanykwok/Desktop/BathHack2025/timetable_2025-04-05.csv" #your timetable stored as csv file
+#current = datetime.now() #get device time
+##timetableInfo = getTimetableInfo(myFile)
+#print(getNextLecture(current, timetableInfo))

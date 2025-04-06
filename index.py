@@ -36,10 +36,13 @@ class Lecture:
 @app.route("/", methods=['GET','POST'])
 def index():
 
-	myFile = "/Users/tiffanykwok/Desktop/BathHack2025/timetable_2025-04-05.csv" #your timetable stored as csv file
+	myFile = "./static/tt.csv" #your timetable stored as csv file
 	mySchedule = getTimetableInfo(myFile)
 	current_time = dt.datetime.now() #get device time
 	nextDate, lectureInfo = getNextLecture(current_time, mySchedule)
+	
+	print(nextDate)
+	print(lectureInfo)
 	
 	#user has a lecture coming up -> user's csv file is updated enough
 	if lectureInfo is not None:
@@ -70,7 +73,7 @@ def index():
 	path = get_shortest_path(origin_node, dest_node, G, 1.4)
 
 	arrival_time = (current_time + dt.timedelta(seconds=path[-1]['time'])).time()
-	if arrival_time > lecture.start_time:
+	if arrival_time > lecture.start_time.time():
 		late = True
 		time_to_lec = int(path[-1]['time'] / 60)
 
