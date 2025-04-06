@@ -58,9 +58,11 @@ def get_shortest_path(start, finish, G, speed):
 	dicts[-1]['distance'] = 0
 	dicts[0]['time'] = G[path[0]][path[0 + 1]]['distance'] / speed
 	prev = 0
-	for x in range(1, len(dicts) - 1):
+	for x in range(1, len(dicts)-1):
 		dicts[x]['distance'] = G[path[x]][path[x + 1]]['distance']
 		dicts[x]['time'] = (G[path[x - 1]][path[x]]['distance'] / speed) + dicts[x - 1]['time']
+
+	dicts[-1]['time'] = (G[path[-2]][path[-1]]['distance'] / speed) + dicts[-2]['time']
 	return dicts
 
 
@@ -75,6 +77,13 @@ def map():
 	# Generate path
 	path = get_shortest_path('1', '280', G, speed)
 
-	print(path)
+	times = []
+	for p in path:
+		print(p)
+		t = p['time']
+		times.append([
+			str(int(round(t // 60, 2))).zfill(2),
+			str(int(round(t % 60, 0))).zfill(2)
+		])
 
-	return render_template('./map.html', time_remaining="00:00:000", origin_id=origin_id, dest_id=dest_id, path=path)
+	return render_template('./map.html', time_remaining="00:00:000", origin_id=origin_id, dest_id=dest_id, path=path, times=times)

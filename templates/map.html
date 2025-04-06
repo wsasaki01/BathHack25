@@ -22,12 +22,20 @@
 </div>
 
 <footer>
-{% for node in path %}
-	<li class="split-li">
-		<span class="split-left">Node {{ node.lng }}</span>
-		<span class="split-right">{{ node.lat }}</span>
+{% for t in times %}
+	<li class="split-li" node-id="{{ loop.index0 }}">
+		<span class="split-left">Node {{ loop.index }}</span>
+		<span class="split-right">
+			{% if loop.index0==0 %}
+			<span id="first-split">00:00</span>
+			{% else %}
+			<span></span>
+			{% endif %}
+			<span class="split-time">{{ t[0] }}:{{ t[1] }}</span>
+		</span>
 	</li>
 {% endfor %}
+<script src="{{ url_for('static', filename='splitwatch.js') }}"></script>
 </footer>
 
 {% endblock %}

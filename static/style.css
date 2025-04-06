@@ -189,4 +189,20 @@ footer {
 	width: 40%;
 	text-align: right;
 	padding-right: 2vw;
+	display:flex;
+	justify-content: right;
+
+	font-family: "Azeret Mono", monospace;
+	font-optical-sizing: auto;
+	font-weight: 300;
+	font-style: normal;
+	color:white;
+}
+
+#first-split {
+	width: 50%;
+}
+
+.split-time {
+	width: 50%;
 }
