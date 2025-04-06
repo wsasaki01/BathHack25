@@ -8,7 +8,7 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-var dotIcon = L.icon({
+var nodeIcon = L.icon({
 	iconUrl: 'static/img/black-circle.png',
 
 	iconSize: [10,10],
@@ -16,8 +16,16 @@ var dotIcon = L.icon({
 	popupAnchor: [5,5]
 })
 
+var userIcon = L.icon({
+	iconUrl: 'static/img/blue-circle.png',
+
+	iconSize: [10,10],
+	iconAnchor: [5,5],
+	popupAnchor: [5,5]
+})
+
 markerData.forEach(function(location) {
-	L.marker([location.lat, location.lng], {icon: dotIcon}).addTo(map).bindPopup(location.popup)
+	L.marker([location.lat, location.lng], {icon: nodeIcon}).addTo(map).bindPopup(location.popup)
 })
 
 for (let i=1; i<markerData.length; i++) {

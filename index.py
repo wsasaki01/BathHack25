@@ -16,6 +16,8 @@ app = Flask(__name__)
 foo = secrets.token_urlsafe(16)
 app.secret_key = foo
 
+app.run('0.0.0.0', debug=True, port=8000, ssl_context='adhoc')
+
 # Bootstrap-Flask requires this line
 bootstrap = Bootstrap5(app)
 # Flask-WTF requires this line
@@ -79,7 +81,7 @@ def map():
 
 	times = []
 	for p in path:
-		print(p)
+		#print(p)
 		t = p['time']
 		times.append([
 			str(int(round(t // 60, 2))).zfill(2),
@@ -87,3 +89,10 @@ def map():
 		])
 
 	return render_template('./map.html', time_remaining="00:00:000", origin_id=origin_id, dest_id=dest_id, path=path, times=times)
+
+"""
+if __name__ == '__main__':
+	context = ('./ssl-shit/server.crt', './ssl-shit/server.key')
+	app.run(debug=False, port=8000)
+	#app.run(debug=True, port=8000)
+"""

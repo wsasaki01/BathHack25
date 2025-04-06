@@ -12,6 +12,7 @@
 
 		<script>
 			const markerData = {{ path | tojson }};
+			let userPos = [0,0];
 		</script>
 		
 		<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -37,5 +38,7 @@
 {% endfor %}
 <script src="{{ url_for('static', filename='splitwatch.js') }}"></script>
 </footer>
+
+<script src="{{ url_for('static', filename='geo.js') }}"></script>
 
 {% endblock %}
