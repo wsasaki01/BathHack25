@@ -20,64 +20,74 @@ h5 {font-size: 3vh; /* 22.56px */}
 
 small {font-size: 1vh; /* 11.36px */}
 
+p {font-size: 2vh;}
+
 /* themes */
-@media (prefers-color-scheme: light) {
-  :rpip install -r requirements.txt
-oot {
-    --text: rgb(25, 1, 7);
-    --background: rgb(255, 249, 251);
-    --primary: rgb(241, 27, 86);
-    --secondary: rgb(248, 150, 129);
-    --accent: rgb(245, 146, 86);
-  }
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: rgb(254, 231, 236);
-    --background: rgb(5, 0, 2);
-    --primary: rgb(225, 14, 74);
-    --secondary: rgb(125, 29, 7);
-    --accent: rgb(169, 71, 10);
-  }
+:root {
+  --text: rgb(25, 1, 7);
+  --background: rgb(255, 249, 251);
+  --primary: rgb(241, 27, 86);
+  --secondary: rgb(248, 150, 129);
+  --accent: rgb(245, 146, 86);
 }
 
 /* style */
 html {
   margin: 0;
   padding: 0;
+
+  background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252, 70, 106, 0.471) 100%), url("img/background.png");
+  background-blend-mode: multiply;
+  object-fit: contain;
+
+  overflow-x: hidden;
 }
 
 body {
-  background: linear-gradient(0deg, rgba(131,58,180,0.4910131288843662) 0%, rgba(253,29,29,0.8971755938703606) 30%, rgba(252,176,69,0.8831699916294643) 30%, rgba(252,176,69,0.138071952413778) 50%),  url("img/background.png");
-  background-blend-mode: overlay;
-  background-size: 100% 100%;
-
   font-family: 'Kantumruy Pro';
   font-weight: 400;
+  text-align: center;
 
   margin: 3%;
   height: 97vh;
-  overflow: hidden;
 }
 
 .content-container {
 	display: flex; 
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0% 3% 3% 3%;
+  gap: 2em;
   
-	background-color: white;
 	min-height: 100%;
+  border-radius: 30px;
+  background-color: var(--background);
 }
+
+
+
 
 /* banner */
 .banner {
-  /* Start the shake animation and make the animation last for 0.5 seconds */
-  animation: shake 0.5s;
-
-  /* When the animation is finished, start again */
-  animation-iteration-count: infinite;
+  padding-top: 15px;
+  animation: shake 0.3s infinite ease-in-out;
 }
+
+.banner img {
+  position: absolute;
+  z-index: -1;
+
+  top: 0;
+  left: 0;
+  height: 150%;
+  width: 150%;
+  
+  transform:  skewY(-6deg) translateX(-18%) translateY(-25%);
+}
+
 
 @keyframes shake {
   0% { transform: translate(1px, 1px) rotate(0deg); }
@@ -93,31 +103,63 @@ body {
   100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
 
-/* button styling */
-button {
+/* form */
+.form {
+  flex-shrink: 0;
+  background-color: var(--secondary);
+  width: 100%;
+  border-radius: 20px;
+  font-size: 2rem;
+}
+
+.form h5 {
+  margin: 0;
+  padding: 3%
+}
+
+
+.form input[type=submit] {
   border: none;
   background-color: var(--primary);
-  color: var(--text);
+  
 
-  width: 30vi;
-  height: 15vh;
-  border-radius: 15px 15px 0px 0px;
+  color: var(--background);
+  font-weight: bold;
+  font-style: italic ;
+  font-size: large;
+  text-align: center;
+  margin: 3%;
 
+  --t: 45%; /* control the tail part */
+  --h: 40%; /* control the head part */
+  
+  aspect-ratio: 3/2;
+  width: 20vw;
+  background: var(--primary);
+  clip-path: polygon(0 calc(50% - var(--t)/2),calc(100% - var(--h)) calc(50% - var(--t)/2),calc(100% - var(--h)) 0,100% 50%,calc(100% - var(--h)) 100%,calc(100% - var(--h)) calc(50% + var(--t)/2),0 calc(50% + var(--t)/2));
+  transform: skewX(-10deg) scale(110%);
   cursor: pointer;
 }
 
-.buttons {  
+
+/* content - messages to display */
+.content {
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
+  padding: 3%;
+  border-radius: 20px;
 
-  align-items: center;
-  gap: 1em;
-  padding: 5%;
 }
 
-.moods {
-  display: flex;
+.content h4 {
+  padding: 3%;
+  margin: 1%;
+  border: dashed 2px var(--accent);
+}
+
+.content p {
+  margin: 2%;
 }
 
 .page-content {
@@ -132,6 +174,16 @@ button {
   max-height: 50vi;
   height: 50vh;
 }
+
+
+.split-li {
+	height: 5vh;
+	line-height: 5vh; /* must be same as height for vertical centering */
+	text-align: center;
+	
+	border-bottom: solid;
+}
+
 
 /*.splits {
 	width: 100%;
@@ -176,10 +228,26 @@ main {
 </div>
 */
 
-.split-li {
-	height: 5vh;
-	line-height: 5vh; /* must be same as height for vertical centering */
-	text-align: center;
-	
-	border-bottom: solid;
+/* button styling
+button {
+  border: none;
+  background-color: var(--primary);
+  color: var(--text);
+
+  width: 30vi;
+  height: 15vh;
+  border-radius: 15px 15px 0px 0px;
+
+  cursor: pointer;
 }
+
+.buttons {  
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  align-items: center;
+  gap: 1em;
+  padding: 5%;
+}
+*/

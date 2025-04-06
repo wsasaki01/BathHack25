@@ -2,33 +2,17 @@
 {% from 'bootstrap5/form.html' import render_form %}
 
 {%block banner%}
-YOU'RE 10 MINUTES LATE!
+10 MINUTES LATE!
 {%endblock%}
 
-{% block content %}
 
-<h2>YOU'RE LATE TO {{ lecture.module_name.upper() }}!!!</h2>
-<p>Your {{ lecture.unit_code }} lecture starts at {{ lecture.start_time.strftime("%H:%M") }}!!</p>
-<p>you're gonna make {{ lecture.lecturer }} very very very <strong>sad</strong></p>
-
-<p>What's your current state?</p>
+{%block form%}
+<h5>How do you feel currently?</h5>
 {{ render_form(form) }}
+{%endblock%}
 
-
-<div id="map"></div>
-
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-crossorigin=""></script>
-<script src="{{url_for("static", filename="scripts.js")}}"></script>
-
-<div class="buttons">
-	<div class="moods">
-		<button type="button">Sleepy</button>
-		<button type="button">Hungover</button>
-	</div>
-	
-	<button type="submit" class="go">GO!</button>
-</div>
-
+{%block content%}
+<h4>YOU'RE LATE TO {{ lecture.module_name.upper() }}!!!</h2>
+<p>your {{ lecture.unit_code }} lecture starts at {{ lecture.start_time.strftime("%H:%M") }}!!</p>
+<p>you're gonna make {{ lecture.lecturer }} very very <strong>sad</strong></p>
 {% endblock %}

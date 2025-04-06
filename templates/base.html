@@ -16,7 +16,9 @@
 	<div class="content-container">
 		<div class="banner">
 			<h1>{% block banner %}{% endblock %}</h1>
+			<img src="static/img/BOOM.png"/>
 		</div>
+
 		<div class="content">
 			{% for message in get_flashed_messages() %}
 				<div class="flash">{{ message }}</div>
@@ -25,6 +27,12 @@
 			{% block content %}
 			{% endblock %}
 		</div>
+
+		
+		<div class="form">
+			{%block form%} {%endblock%}
+		</div>
+
 	</div>
 	
 <body>
