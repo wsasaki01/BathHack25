@@ -43,7 +43,7 @@ def getNextLecture(current, myDict):
 	dateStrg = closestDate.strftime("%Y-%m-%d")
 	notFound = True
 
-	while dateStrg < maxDate and notFound:
+	while dateStrg <= maxDate and notFound:
 	
 		#earliest date with lectures
 		if dateStrg in myDict:
@@ -69,6 +69,10 @@ def getNextLecture(current, myDict):
 			currentTime = "00:00"
 
 		dateStrg = closestDate.strftime("%Y-%m-%d")
+
+	#no lectures coming up
+	if dateStrg > maxDate:
+		return None
 
 	return [dateStrg, closestTime]
 
