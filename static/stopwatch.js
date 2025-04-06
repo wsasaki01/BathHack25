@@ -53,5 +53,3 @@ function createStopwatch(elementId) {
   
   // Example usage:
   const mainStopwatch = createStopwatch('speedrun-timer'); // Replace 'stopwatch-display' with your element's ID.
-  
-  mainStopwatch.start();

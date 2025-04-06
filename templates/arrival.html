@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ message }}</h1>
+<h3 id="time">Arrived at </h3>
+
+<a href="{{ url_for('index') }}">Back to Home</a>
+
+<script>
+	let time = document.getElementById("time");
+	const now = new Date();
+	const formattedTime = now.toLocaleTimeString();
+
+	time.textContent = "Arrived at " + formattedTime;
+</script>
+{% endblock %}

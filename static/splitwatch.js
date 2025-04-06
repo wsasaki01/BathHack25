@@ -51,7 +51,6 @@ function createSplitwatch(elementId) {
 }
 
 let splitStopwatch = createSplitwatch('first-split');
-splitStopwatch.start();
 
 let currentSplitIndex = 1;
 const intervalId = setInterval(checkCurrentSplit, 250)
@@ -81,11 +80,15 @@ function checkCurrentSplit() {
 	)
 
 	// if geolocation is within 4 metres of node
-	if (mainStopwatch.getElapsedTime() > 2000 && currentSplitIndex==1) {
+	if (mainStopwatch.getElapsedTime() > 2000) {
 
 		//console.log("user passed node!");
 		currentSplitIndex += 1;
 		//console.log(currentSplit);
+
+		if (currentSplitIndex == markerData.length) {
+			window.location.href = '/';
+		}
 
 		currentSplit.removeAttribute('id');
 		//console.log("removed id from current split");

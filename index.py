@@ -42,7 +42,7 @@ def index():
 		lecturer="Dr Deblina Bhattacharjee"
 	)
 
-	G = nx.read_edgelist('bath_campus_graph.txt')
+	# G = nx.read_edgelist('bath_campus_graph.txt')
 
 	form = StateForm()
 	if form.validate_on_submit():
@@ -93,6 +93,18 @@ def map():
 		])
 
 	return render_template('./map.html', time_remaining="00:00:000", origin_id=origin_id, dest_id=dest_id, path=path, times=times)
+
+@app.route("/arrived")
+def arrived():
+	start_time = dt.datetime(2025, 4, 6, 9, 15)
+	current_time = dt.datetime.now()
+	print(start_time-current_time)
+	message = ""
+	if current_time > start_time:
+		message = f"YOU'RE {current_time.strftime('%M')} MINUTES LATE!!!!"
+	else:
+		message = f"YOU MADE IT!!\n{ int((start_time-current_time).seconds / 60) } MINUTES EARLY!!"
+	return render_template('./arrival.html', start_time=start_time, message=message)
 
 """
 if __name__ == '__main__':
