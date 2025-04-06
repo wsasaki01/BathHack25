@@ -9,8 +9,7 @@ from wtforms.validators import DataRequired, Length
 import datetime as dt
 
 from forms.index_form import StateForm
-
-from individualTime import getTimetable
+from individualTime import getTimetableInfo, getNextLecture
 
 import secrets # For secret key
 
@@ -36,20 +35,29 @@ class Lecture:
 
 @app.route("/", methods=['GET','POST'])
 def index():
-	current_time = dt.datetime.now()
-	tt = getTimetable()
 
-	# get next lecture from tt
+	myFile = "/Users/tiffanykwok/Desktop/BathHack2025/timetable_2025-04-05.csv" #your timetable stored as csv file
+	mySchedule = getTimetableInfo(myFile)
+	current_time = dt.datetime.now() #get device time
+	nextDate, lectureInfo = getNextLecture(current_time, mySchedule)
+	
+	#user has a lecture coming up -> user's csv file is updated enough
+	if lectureInfo is not None:
+		startTime, building, floor, module, staff = lectureInfo
+
+	#get time of next lecture
+	lecture_year, lecture_month, lecture_date = [int(i) for i in nextDate.split("-")]
+	lecture_hour, lecture_min = [int(i) for i in startTime.split(":")]
 
 	late = False
 	time_to_lec = ""
 
 	# Find next lecture
 	lecture = Lecture(
-		unit_code="CM22010",
-		start_time=dt.datetime(2025, 5, 5, 9, 15).time(),
-		module_name="Visual Computing",
-		lecturer="Dr Deblina Bhattacharjee"
+		unit_code=module,
+		start_time=dt.datetime(lecture_year, lecture_month, lecture_date, lecture_hour, lecture_min),
+		module_name=module,
+		lecturer=staff
 	)
 
 	#session['lecture_start_time'] = lecture.start_time
