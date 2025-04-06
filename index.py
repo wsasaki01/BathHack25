@@ -8,6 +8,7 @@ from wtforms.validators import DataRequired, Length
 from datetime import datetime
 
 from forms.index_form import StateForm
+from individualTime import getTimetableInfo, getNextLecture
 
 import secrets # For secret key
 
@@ -31,12 +32,26 @@ class Lecture:
 
 @app.route("/", methods=['GET','POST'])
 def index():
+
+	myFile = "/Users/tiffanykwok/Desktop/BathHack2025/timetable_2025-04-05.csv" #your timetable stored as csv file
+	mySchedule = getTimetableInfo(myFile)
+	current = datetime.now() #get device time
+	nextDate, lectureInfo = getNextLecture(current, mySchedule)
+	
+	#user has a lecture coming up -> user's csv file is updated enough
+	if lectureInfo is not None:
+		startTime, building, floor, module, staff = lectureInfo
+
+	#get time of next lecture
+	lecture_year, lecture_month, lecture_date = [int(i) for i in nextDate.split("-")]
+	lecture_hour, lecture_min = [int(i) for i in startTime.split(":")]
+
 	# Find next lecture
 	lecture = Lecture(
-		unit_code="CM22010",
-		start_time=datetime(2025, 5, 5, 9, 15),
-		module_name="Visual Computing",
-		lecturer="Dr Deblina Bhattacharjee"
+		unit_code=module,
+		start_time=datetime(lecture_year, lecture_month, lecture_date, lecture_hour, lecture_min),
+		module_name=module,
+		lecturer=staff
 	)
 
 	G = nx.read_edgelist('bath_campus_graph.txt')
