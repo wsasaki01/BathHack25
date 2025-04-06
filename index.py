@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, request, session
 from flask_bootstrap import Bootstrap5
 import networkx as nx
+import pandas as pd
 
 from flask_wtf import FlaskForm, CSRFProtect
 from wtforms import StringField, SubmitField
@@ -27,11 +28,12 @@ bootstrap = Bootstrap5(app)
 csrf = CSRFProtect(app)
 
 class Lecture:
-	def __init__(self, unit_code, module_name, start_time, lecturer):
+	def __init__(self, unit_code, module_name, start_time, lecturer, node):
 		self.unit_code = unit_code
 		self.start_time = start_time
 		self.module_name = module_name
 		self.lecturer = lecturer
+		self.building_node = node
 
 @app.route("/", methods=['GET','POST'])
 def index():
@@ -55,13 +57,23 @@ def index():
 	late = False
 	time_to_lec = ""
 
+	data = pd.read_csv('BathHack25_RoomLabels.csv')
+
+	lec2node = {}
+
+	for idx, row in data.iterrows():
+		lec2node[row['Building']] = row['Points'].split('-')[0]
+
 	# Find next lecture
 	lecture = Lecture(
 		unit_code=module,
 		start_time=dt.datetime(lecture_year, lecture_month, lecture_date, lecture_hour, lecture_min),
 		module_name=module,
-		lecturer=staff
+		lecturer=staff,
+		node=lec2node[building]
 	)
+
+	print(lec2node[building])
 
 	#session['lecture_start_time'] = lecture.start_time
 
