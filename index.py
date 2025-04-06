@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, session
 from flask_bootstrap import Bootstrap5
 import networkx as nx
 
@@ -9,6 +9,8 @@ from wtforms.validators import DataRequired, Length
 import datetime as dt
 
 from forms.index_form import StateForm
+
+from individualTime import getTimetable
 
 import secrets # For secret key
 
@@ -34,15 +36,35 @@ class Lecture:
 
 @app.route("/", methods=['GET','POST'])
 def index():
+	current_time = dt.datetime.now()
+	tt = getTimetable()
+
+	# get next lecture from tt
+
+	late = False
+	time_to_lec = ""
+
 	# Find next lecture
 	lecture = Lecture(
 		unit_code="CM22010",
-		start_time=dt.datetime(2025, 5, 5, 9, 15),
+		start_time=dt.datetime(2025, 5, 5, 9, 15).time(),
 		module_name="Visual Computing",
 		lecturer="Dr Deblina Bhattacharjee"
 	)
 
-	# G = nx.read_edgelist('bath_campus_graph.txt')
+	#session['lecture_start_time'] = lecture.start_time
+
+	origin_node = '1'
+	dest_node = '280' # make this dynamic!!
+
+	# Get path to see how long it would take
+	G = nx.read_graphml('graph.graphml')
+	path = get_shortest_path(origin_node, dest_node, G, 1.4)
+
+	arrival_time = (current_time + dt.timedelta(seconds=path[-1]['time'])).time()
+	if arrival_time > lecture.start_time:
+		late = True
+		time_to_lec = int(path[-1]['time'] / 60)
 
 	form = StateForm()
 	if form.validate_on_submit():
@@ -54,9 +76,9 @@ def index():
 		elif state == "Still Drunk":
 			speed *= 0.4
 
-		return redirect(url_for('map', origin_id="1", dest_id="6", speed=f"{speed}"))
+		return redirect(url_for('map', origin_id=origin_node, dest_id=dest_node, speed=f"{speed}"))
 
-	return render_template('./index.html', form=form, lecture=lecture)
+	return render_template('./index.html', form=form, lecture=lecture, late=late, time_to_lec=time_to_lec, arrival_time=arrival_time)
 
 def get_shortest_path(start, finish, G, speed):
 	path = nx.dijkstra_path(G, start, finish)
@@ -94,7 +116,7 @@ def map():
 
 	return render_template('./map.html', time_remaining="00:00:000", origin_id=origin_id, dest_id=dest_id, path=path, times=times)
 
-@app.route("/arrived")
+@app.route("/arrival")
 def arrived():
 	start_time = dt.datetime(2025, 4, 6, 9, 15)
 	current_time = dt.datetime.now()

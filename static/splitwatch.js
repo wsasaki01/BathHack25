@@ -87,7 +87,7 @@ function checkCurrentSplit() {
 		//console.log(currentSplit);
 
 		if (currentSplitIndex == markerData.length) {
-			window.location.href = '/';
+			window.location.href = '/arrival';
 		}
 
 		currentSplit.removeAttribute('id');

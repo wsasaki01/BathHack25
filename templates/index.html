@@ -1,14 +1,21 @@
 {% extends 'base.html' %}
 {% from 'bootstrap5/form.html' import render_form %}
 
+
 <div class="banner">
-	<h1>YOU'RE 10 MINUTES LATE!</h1>
+	{% if late %}
+		<h1>YOU'RE 10 MINUTES LATE!</h1>
+	{% else %}
+		<h1>ur chilling bro</h1>
+	{% endif %}
 </div>
 
 {% block content %}
 
 <h2>YOU'RE LATE TO {{ lecture.module_name.upper() }}!!!</h2>
 <p>Your {{ lecture.unit_code }} lecture starts at {{ lecture.start_time.strftime("%H:%M") }}!!</p>
+<h5>IT'LL TAKE {{ time_to_lec }} MINUTES TO GET THERE!!!</h5>
+<h5>ARRIVAL AT {{ arrival_time.strftime("%H:%M") }}!!!</h5>
 <p>you're gonna make {{ lecture.lecturer }} very very very <strong>sad</strong></p>
 
 <p>What's your current state?</p>
